@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+  joomla_wiki:
+    image: joomla
+    restart: always
+    links:
+      - joomladb_wiki:mysql
+    ports:
+      - 7878:80
+    volumes:
+      - /home/docker_data/joomladata/html:/var/www/html
+    environment:
+      JOOMLA_DB_HOST: joomladb_wiki
+      JOOMLA_DB_PASSWORD: 12L!nker89
+
+  joomladb_wiki:
+    image: mysql:5.7
+    restart: always
+    volumes:
+       - /home/docker_data/sqldata/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 12L!nker89
+
+#volumes:
+#  data_web:
+#    external: true
+#      name:/home/docker-data/joomladata/html
+#  data_sql:
+#    external: true
+#      name:/home/docker-data/sqldata/mysql
+      
